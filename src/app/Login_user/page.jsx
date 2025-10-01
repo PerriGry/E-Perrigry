@@ -1,29 +1,32 @@
-import {Input} from '@/components'
-import Image from 'next/image'
+
+import Image from "next/image";
+import { ButtonGoogleLogin, inputCheckPassword, inputPassword, inputUser, buttonSubmit, inputEmail } from "@/components";
+const login_cat = "/login_cat.jpg"
 
 
 export default function Login() {
     return (
-        <div className="bg-slate-200 w-screen h-screen flex items-center justify-center" >
+        <div className="bg-white w-screen h-screen flex items-center justify-center" >
 
-            <div className=" ">
-                <Image src=""></Image>
+            <div className="border-1 border-black w-100 h-150 flex items-center justify-center">
+                <Image src={login_cat} width={400} height={100} alt="" />
             </div>
-            <div className="text-black">
-                <h1>E- Perrigry</h1>
-                <p>Los mejores accesorios para tu mascota</p>
+
+            <div className="w-100 h-150 text-black border-1 border-black flex flex-col items-center">
+                <h1 className="text-black text-2xl font-bold">E- Perrigry</h1>
+                <p className="text-black text-2xl font-bold">Los mejores accesorios para tu mascota</p>
 
                 <form action="">
-                    <p>Nombre de usuario</p>
-                    <input type="text" placeholder="Ingrese el usuario" className="border-1 border-black bg-white " />
-                    <p>Contraseña</p>
-                    <button className="text-decoration-none text-teal-700 cursor-pointer">
-                        olvidaste tu contraseña?
-                    </button>
-
-                    <button className="bg-slate-700 text-white border-black cursor-pointer">
-                        Enviar
-                    </button>
+                    {inputUser()}
+                    {inputEmail()}
+                    {inputPassword()}
+                    {inputCheckPassword()}
+                    <div className="flex justify-center mt-4">
+                        {buttonSubmit()}
+                    </div>
+                    <div className="flex justify-center mt-4">
+                        <ButtonGoogleLogin />
+                    </div>
                 </form>
             </div>
         </div>
