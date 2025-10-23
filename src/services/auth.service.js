@@ -59,6 +59,6 @@ export const verify_refresh_token = (token) =>{
     }
 }
 //SERVICIO VERIFICAR ACCESS TOKEN
-export const verifY_access_token = (token) =>{
-    return JWT.verify(token, process.env.ACCESS_SECRET_KEY);
+export const verify_access_token = (token) =>{
+    return JWT.verify(token, process.env.ACCESS_SECRET_KEY_JWT);
 }
