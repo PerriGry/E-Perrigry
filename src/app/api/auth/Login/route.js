@@ -2,6 +2,74 @@ import { find_email, compare_pwd, generate_token } from "@/services/auth.service
 import { cookies } from "next/headers";
 import { loginSchema } from "@/validator/schemas";
 
+/**
+ * @swagger
+ * /auth/login:
+ *   post:
+ *     summary: Iniciar sesión de usuario
+ *     description: Verifica las credenciales del usuario y genera tokens de autenticación (access y refresh).
+ *     tags:
+ *       - Autenticación
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - email
+ *               - password
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 format: email
+ *                 example: usuario@example.com
+ *               password:
+ *                 type: string
+ *                 minLength: 6
+ *                 example: "123456"
+ *     responses:
+ *       201:
+ *         description: Login exitoso. Retorna mensaje de confirmación y setea cookies con los tokens.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "login exitoso"
+ *       400:
+ *         description: Error de validación en los datos enviados.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: "El campo email es obligatorio"
+ *       401:
+ *         description: Credenciales incorrectas (contraseña errónea o usuario no encontrado).
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Contraseña Erronea"
+ *       500:
+ *         description: Error interno del servidor.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: "Internal server error"
+ */
 export async function POST(req) {
     try {
         //Body

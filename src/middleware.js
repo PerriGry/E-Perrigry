@@ -7,7 +7,9 @@ export async function middleware(request){
     const routesPublic = [
         '/api/auth/Login',
         '/api/auth/register',
-        '/api/auth/auth_google'
+        '/api/auth/auth_google',
+        '/api/docs',
+        '/api/swagger.json'
     ];
     //Recorrer cada ruta y ver Sí alguna Coincide con lo solicitado (.some())
     //(.nextUrl) -> Acceder a la URL de la request
