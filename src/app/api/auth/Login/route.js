@@ -1,10 +1,17 @@
 import { find_email, compare_pwd, generate_token } from "@/services/auth.service";
 import { cookies } from "next/headers";
+import { loginSchema } from "@/validator/schemas";
 
 export async function POST(req) {
     try {
         //Body
-        const {email, password} = await req.json();
+        const body = await req.json();
+        //Asignar Body
+        const {email, password} = body;
+        //Llamado al Servicio de Validacion
+        const parsed = loginSchema.safeParse(body);
+        //Validacion de Estado de los Valores
+        if(!parsed.success) return new Response(JSON.stringify({error: parsed.error.message}),{status:400});
         //Buscar User segun el Email 
         const user = await find_email(email);
         //Verificar
