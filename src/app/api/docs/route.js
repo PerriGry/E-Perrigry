@@ -2,10 +2,10 @@ import { ApiReference } from "@scalar/nextjs-api-reference";
 
 const config = {
   spec: {
-    url: "/api/swagger.json", // Tu archivo OpenAPI
+    url: "/api/swagger.json", //Archivo Json 
   },
-  layout: "modern", // puedes probar "classic" o "sidebar"
-  theme: "default", // otros: "alternate", "dark"
+  layout: "modern", 
+  theme: "default", 
   hideDownloadButton: false,
 };
 

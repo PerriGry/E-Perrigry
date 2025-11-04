@@ -24,7 +24,7 @@ const options = {
       },
     ],
   },
-  // 👇 IMPORTANTE: ruta donde están tus endpoints con comentarios @swagger
+  // Ruta de Endpoints con comentarios @swagger
   apis: ["./src/app/api/**/*.js", "./src/app/api/**/*.jsx", "./src/app/api/**/*.ts"],
 };
 
