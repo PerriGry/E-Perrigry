@@ -8,7 +8,7 @@ export default function ButtonGoogleLogin() {
   return (
     <button
       type="button"
-      onClick={() => signIn("google", { callbackUrl: "/" })} // 👈 fuerza el flujo de Google
+      onClick={() => signIn("google", { callbackUrl: "/" })} //Dentro de callbackUrl hay que poner la url que sigue en el flujo de la app
       className="flex items-center gap-3 px-4 py-2 bg-white border border-gray-300 rounded-lg shadow hover:bg-gray-100 transition"
     >
       <img src={Google_logo} width={30} height={130} alt="" />

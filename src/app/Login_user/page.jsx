@@ -1,4 +1,4 @@
-
+'use client'
 import Image from "next/image";
 import { ButtonGoogleLogin, inputCheckPassword, inputPassword, inputUser, buttonSubmit, inputEmail } from "@/components";
 const login_cat = "/login_cat.jpg"
