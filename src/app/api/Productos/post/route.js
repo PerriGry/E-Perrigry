@@ -8,7 +8,7 @@ import { productRegisterSchema } from "@/validator/schemas";
  *     summary: Registrar un nuevo producto
  *     description: >
  *       Crea un nuevo producto en la base de datos validando sus datos con Zod.  
- *       Los campos requeridos son **nombre**, **stock**, **precio** y **category**.
+ *       Los campos requeridos son **nombre**, **stock**, **precio**, **category** y **img_url** (debe ser una URL válida).
  *     tags:
  *       - Productos
  *     requestBody:
@@ -22,6 +22,7 @@ import { productRegisterSchema } from "@/validator/schemas";
  *               - stock
  *               - precio
  *               - category
+ *               - img_url
  *             properties:
  *               nombre:
  *                 type: string
@@ -41,6 +42,11 @@ import { productRegisterSchema } from "@/validator/schemas";
  *                 enum: [Gato, Perro, Hamster]
  *                 description: Categoría del producto
  *                 example: "Perro"
+ *               img_url:
+ *                 type: string
+ *                 format: uri
+ *                 description: URL de la imagen del producto (debe ser una URL válida)
+ *                 example: "https://tse1.mm.bing.net/th/id/OIP.PTP4IQV-roMyF3EpbCqE7wHaE7?rs=1&pid=ImgDetMain&o=7&rm=3"
  *     responses:
  *       201:
  *         description: Producto registrado exitosamente
@@ -76,12 +82,12 @@ import { productRegisterSchema } from "@/validator/schemas";
 export async function POST(req) {
     try {
         const body = await req.json();
-        const {nombre, stock, precio, category} = body;
+        const {nombre, stock, precio, category, img_url} = body;
         //Llamado al Servicio de Validacion
         const parsed = productRegisterSchema.safeParse(body);
         //Validacion de Estado de los Valores
         if(!parsed.success) return new Response(JSON.stringify({error: parsed.error.message}),{status:400});
-        await RegisterProductos(nombre, stock, precio, category);
+        await RegisterProductos(nombre, stock, precio, category, img_url);
         return new Response(JSON.stringify({Message: "Producto Registrado"}), {status:201})
     } catch (error) {
         return new Response(JSON.stringify({error: error.message}), {status:500})

@@ -36,10 +36,10 @@ export const getProductById = async(idProduct) => {
 }
 
 //Servicio de Registro de Productos
-export const RegisterProductos = async(nombre, stock, precio, category)=>{
+export const RegisterProductos = async(nombre, stock, precio, category, img_url)=>{
     return await pool.query(
-    'CALL p_insert_productos($1,$2,$3,$4);',
-    [nombre, stock, precio, category]
+    'CALL p_insert_productos($1,$2,$3,$4,$5);',
+    [nombre, stock, precio, category, img_url]
     )
 }
 

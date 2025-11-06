@@ -35,7 +35,9 @@ export const productRegisterSchema = z.object({
     category: z.enum(["Gato", "Perro", "Hamster"], {
         required_error: "La categoría es obligatoria",
         invalid_type_error: "Categoría inválida",
-    })
+    }),
+    img_url: z.string()
+    .url("Debe ser una URL válida")
 })
 
 //Schema para Actualizar Porductos
