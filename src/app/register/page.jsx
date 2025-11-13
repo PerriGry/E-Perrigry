@@ -1,31 +1,36 @@
-import { inputPassword, inputUser, buttonSubmit, inputEmail } from "@/components";
 import Image from "next/image";
+import { ButtonGoogleLogin, inputCheckPassword, inputPassword, inputUser, buttonSubmit, inputEmail } from "@/components";
 
 
-const logo = "/userIcon.png"
+const login_cat = "/login_cat.jpg"
+
 
 export default function Register() {
     return (
-        <div className="flex items-center justify-center align-middle w-screen h-screen bg-white">
+        <div className="bg-white w-screen h-screen flex items-center justify-center" >
 
-            <div className="flex items-center justify-center">
-                <div className="border-1 border-black w-80 h-100 flex items-center justify-center">
-                    <Image src={logo} width={100} height={100} alt="" />
-                </div>
-                <div className=" w-80 h-100 bg-white text-black border-1 border-black flex flex-col items-center ">
-                    <h1 className="font-bold text-4xl ">Registro</h1>
-                    <h3>Registrate en PerriGry!</h3>
-                    <form className="w-full ml-1">
-                        {inputUser()}
-                        {inputEmail()}
-                        {inputPassword()}
-                        <div className="flex justify-center mt-4">
-                            {buttonSubmit()}
-                        </div>
-                    </form>
-                </div>
+            <div className="border-2h border-black w-100 h-150 flex items-center justify-center">
+                <Image src={login_cat} width={400} height={100} alt="" />
             </div>
 
+            <div className="w-100 h-150 text-black border-2 border-black flex flex-col items-center">
+                <h1 className="text-black text-2xl font-bold">Registro</h1>
+                <p className="text-black text-2xl font-bold">Registrate en PerriGry!</p>
+
+                <form action="">
+                    {inputUser()}
+                    {inputEmail()}
+                    {inputPassword()}
+                    {inputCheckPassword()}
+                    <div className="flex justify-center mt-4">
+                        {buttonSubmit()}
+                    </div>
+                    <div className="flex justify-center mt-4">
+                        <ButtonGoogleLogin />
+                    </div>
+                </form>
+            </div>
         </div>
-    );
+
+    )
 }

@@ -4,6 +4,9 @@ import buttonSubmit from "./common/buttonSubmit";
 import inputEmail from "./common/inputEmail";
 import inputCheckPassword from "./common/inputCheckPassword";
 import ButtonGoogleLogin from "./common/ButtonGoogleLogin";
+import Header from "./common/Header";
+import GridSection from "@/app/Grid/Grid";
+
 
 
 export { 
@@ -12,5 +15,7 @@ export {
     buttonSubmit,
     inputEmail,
     inputCheckPassword,
-    ButtonGoogleLogin
+    ButtonGoogleLogin,
+    Header,
+    GridSection
 };

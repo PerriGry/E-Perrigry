@@ -1,38 +1,29 @@
 "use client";
 
-import { signIn, signOut, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
+import Header from "../components/common/Header.jsx";
+import Image from "next/image";
+import GridSection from "./Grid/Grid.jsx";
 
 export default function Home() {
   const { data: session } = useSession();
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen">
-      {!session ? (
-        <>
-          <h2>Inicia sesión con Google</h2>
-          <button
-            onClick={() => signIn("google")}
-            className="bg-blue-500 text-white p-2 rounded"
-          >
-            Iniciar sesión con Google
-          </button>
-        </>
-      ) : (
-        <>
-          <h2>Hola, {session.user.name}</h2>
-          <img
-            src={session.user.image}
-            alt="foto"
-            className="rounded-full w-16 h-16"
-          />
-          <button
-            onClick={() => signOut()}
-            className="bg-red-500 text-white p-2 rounded mt-3"
-          >
-            Cerrar sesión
-          </button>
-        </>
-      )}
+    <div className="flex flex-col items-center min-h-screen bg-white">
+      <Header />
+
+      {/* Imagen principal */}
+      <div className="relative w-full h-[300px] md:h-[400px] lg:h-[500px] overflow-hidden">
+        <Image
+        src="/bgg.jpg" 
+        alt="bg"
+        width={2000}
+        height={328}
+        />
+      </div>
+
+      {/* Sección de productos */}
+      <GridSection />
     </div>
   );
 }
