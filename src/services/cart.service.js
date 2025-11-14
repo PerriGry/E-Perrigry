@@ -23,7 +23,10 @@ export const getCartByClient = async(idClient) => {
     const result = await pool.query(
         `
         SELECT 
+        P.IDPRODUCTO AS IDPRODUCTO,
         P.NOMBRE AS PRODUCTO,
+        P.PRECIO AS PRECIO,
+        P.URL_IMG AS IMAGE,
         DC.CANTIDAD AS CANTIDAD,
         DC.SUBTOTAL AS SUBTOTAL
         FROM DETALLE_CARRITO AS DC

@@ -1,4 +1,4 @@
-import { getFilterProduct } from "@/services/producto.service";
+import { getFilterProduct, GetProductos } from "@/services/producto.service";
 import { productFilterSchema } from "@/validator/schemas";
 
 /**
@@ -83,6 +83,17 @@ export async function POST(req) {
         //Validacion de Estado de los Valores
         if(!parsed.success) return new Response(JSON.stringify({error: parsed.error.message}),{status:400});
         const result = await getFilterProduct(category);
+        return new Response(JSON.stringify({result}), {status:201})
+    } catch (error) {
+        console.log(error)
+        return new Response(JSON.stringify({error: error.message}), {status:500})
+    }
+}
+
+//Obtener todos los productos
+export async function GET(req) {
+    try {
+        const result = await GetProductos();
         return new Response(JSON.stringify({result}), {status:201})
     } catch (error) {
         console.log(error)
