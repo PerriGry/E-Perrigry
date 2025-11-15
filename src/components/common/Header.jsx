@@ -25,21 +25,14 @@ export default function Headers() {
         <Link href="/" className="hover:text-gray-600 transition">Inicio</Link>
         <Link href="/" className="hover:text-gray-600 transition">Perros</Link>
         <Link href="/" className="hover:text-gray-600 transition">Gatos</Link>
-        <Link href="/contact" className="hover:text-gray-600 transition">Hampter</Link>
+        <Link href="/" className="hover:text-gray-600 transition">Hampter</Link>
       </nav>
 
       {/* Iconos (desktop + mobile) */}
       <div className="hidden md:flex items-center space-x-6">
-        {!session ? (
-            <Link href="/Login_user">
+            <Link href="/user">
                 <Image src={user} width={32} height={32} alt="user" className="cursor-pointer hover:opacity-80" />
             </Link>
-        ):(
-            <Link href="/Login_user" className="flex items-center gap-2">
-                <p className="font-semibold text-black">Hola! {session.user.name}</p>
-                <Image src={user} width={32} height={32} alt="user" className="cursor-pointer hover:opacity-80" />
-            </Link>
-        )}
         <Link href="/g_cart">
           <Image src={cart} width={32} height={32} alt="cart" className="cursor-pointer hover:opacity-80" />
         </Link>

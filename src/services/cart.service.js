@@ -38,3 +38,17 @@ export const getCartByClient = async(idClient) => {
     );
     return result.rows;
 }
+
+//Servicio de Eliminar cierta cantidad de un Porducto contenido en un carrito
+export const deleteProductoFromCart = async(idClient, idProduct, Cantidad) => {
+    try {
+        const result = await pool.query(
+            'CALL delete_product_carrito($1,$2,$3)',
+            [idClient, idProduct, Cantidad]
+        );
+        return true;
+    } catch (error) {
+        console.log('Error en cart.service.deleteProductoFromCart: ', error)
+        return false;
+    }
+}

@@ -48,6 +48,30 @@ export default function CartPage() {
     }
   };
 
+  const handleRemoveOne = async (item) => {
+    try {
+        const res = await fetch("/api/cart/deleteProduct", {
+          method: "DELETE",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            idProduct: item.idproducto,
+            Cantidad: 1,
+          }),
+        });
+
+        const data = await res.json();
+
+        if (res.status === 200) {
+          fetchCart();
+        } else {
+          alert(data.message || "Error al eliminar una unidad");
+        }
+      } catch (err) {
+        alert("No se pudo conectar con el servidor");
+      }
+  };
+
+
   const handleDelete = async (item) => {
     try {
       const res = await fetch("/api/cart/delete", {
@@ -61,6 +85,40 @@ export default function CartPage() {
       alert("No se pudo conectar con el servidor");
     }
   };
+
+    const handleSale = async () => {
+      if (cart.length === 0) {
+        alert("Tu carrito está vacío");
+        return;
+      }
+
+      try {
+        // Extraer ids y cantidades según tu endpoint
+        const idProductos = cart.map((item) => item.idproducto);
+        const cantidad = cart.map((item) => item.cantidad);
+
+        const res = await fetch("/api/sale", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ idProductos, cantidad }),
+        });
+
+        const data = await res.json();
+
+        if (res.status === 200) {
+          alert("Compra realizada con éxito");
+
+          // Opcional: vaciar carrito refrescando desde backend
+          fetchCart();
+
+        } else {
+          alert(data.error || "No se pudo completar la compra");
+        }
+      } catch (err) {
+        alert("Error al conectar con el servidor");
+      }
+    };
+
 
   if (loading) return <p className="p-10 text-center">Cargando carrito...</p>;
 
@@ -122,11 +180,12 @@ export default function CartPage() {
               {/* BOTÓN - */}
               <button
                 className="text-black w-7 h-7 flex items-center justify-center border rounded-md bg-gray-300 hover:bg-gray-100"
-                onClick={() => handleAdd(item, -1)}
+                onClick={() => handleRemoveOne(item)}
                 disabled={item.cantidad <= 1}
               >
                 –
               </button>
+
 
               <span className="font-semibold text-black">{item.cantidad}</span>
 
@@ -160,6 +219,28 @@ export default function CartPage() {
           </div>
         ))}
       </div>
+         {/* FOOTER DE COMPRA */}
+        {cart.length > 0 && (
+          (() => {
+            // Calcular total de la compra
+            const totalCompra = cart
+            .map(item => Number(item.subtotal))  // convertir a número
+            .reduce((acc, val) => acc + val, 0);
+            return (
+              <div className="mt-10 flex justify-end px-4">
+                <button
+                  onClick={handleSale}
+                  className="px-6 py-3 bg-blue-900 text-white rounded-lg hover:bg-blue-950 transition-all shadow-md flex items-center gap-3"
+                >
+                  <span className="font-semibold">Realizar compra</span>
+                  <span className="text-white font-bold">
+                    (${totalCompra.toLocaleString("es-CO")})
+                  </span>
+                </button>
+              </div>
+            );
+          })()
+        )}
     </section>
   );
 }
